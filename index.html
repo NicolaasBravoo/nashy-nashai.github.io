@@ -52,33 +52,14 @@
     © 2025 - Mi Portafolio Fotográfico
   </footer>
 
-  <script>
-  let allImages = [];
+  <script src="script.js"></script>
+  
 
-  function loadAllImages() {
-    const galeria = document.getElementById('galeria');
 
-    allImages.forEach(url => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = 'Foto';
-      img.className = "w-full rounded-lg shadow-md filter grayscale hover:grayscale-0 hover:scale-105 transition-all duration-300 mb-2";
-      img.loading = "lazy";
-
-      galeria.appendChild(img);
-    });
-  }
-
-  fetch('./galeria/images.json')
-    .then(res => res.json())
-    .then(imagenes => {
-      allImages = imagenes;
-      loadAllImages(); // carga todas las imágenes directamente
-    })
-    .catch(error => {
-      console.error("Error cargando imágenes:", error);
-    });
-</script>
-
+<!-- Lightbox (overlay fullscreen) -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+  <button id="cerrarLightbox" class="absolute top-4 right-4 text-white text-3xl font-bold">&times;</button>
+  <img id="lightboxImg" src="" alt="Imagen ampliada" class="max-w-full max-h-full rounded-lg shadow-lg">
+</div>
 </body>
 </html>
