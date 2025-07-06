@@ -21,7 +21,7 @@ body{
 }
 
 /* Para móviles: mostrar todo el video sin recortes */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .video-bg {
     object-fit: cover; /* ajusta todo el video dentro del viewport */
     object-position: center center; /* centrar el video */
