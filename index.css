@@ -8,3 +8,22 @@ body{
 #lightbox {
   transition: opacity 3.0s ease;
 }
+
+.video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;    /* PC: cubrir área */
+  object-position: center; /* PC: alinear top */
+  z-index: -1;
+}
+
+/* Para móviles: mostrar todo el video sin recortes */
+@media (max-width: 768px) {
+  .video-bg {
+    object-fit: contain; /* ajusta todo el video dentro del viewport */
+    object-position: center center; /* centrar el video */
+  }
+}
