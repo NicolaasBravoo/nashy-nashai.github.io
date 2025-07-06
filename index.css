@@ -19,11 +19,3 @@ body{
   object-position: center; /* PC: alinear top */
   z-index: -1;
 }
-
-/* Para móviles: mostrar todo el video sin recortes */
-@media (max-width: 480px) {
-  .video-bg {
-    object-fit: cover; /* ajusta todo el video dentro del viewport */
-    object-position: center center; /* centrar el video */
-  }
-}
