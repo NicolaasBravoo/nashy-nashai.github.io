@@ -43,7 +43,7 @@
   </header>
 
   <main class="max-w-5xl mx-auto p-3">
-    <div id="galeria" class="columns-4 sm:columns-4 md:columns-5 lg:columns-5 gap-2 space-y-2">
+    <div id="galeria" class="columns-3 sm:columns-3 md:columns-3 lg:columns-4 gap-2 space-y-4">
       <!-- Las imágenes se cargarán aquí -->
     </div>
   </main>
@@ -53,53 +53,32 @@
   </footer>
 
   <script>
-    const IMAGES_PER_BATCH = 10;
-    let allImages = [];
-    let currentIndex = 0;
-    let loading = false;
+  let allImages = [];
 
-    function loadNextBatch() {
-      if (loading) return;
-      loading = true;
+  function loadAllImages() {
+    const galeria = document.getElementById('galeria');
 
-      const galeria = document.getElementById('galeria');
-      const nextImages = allImages.slice(currentIndex, currentIndex + IMAGES_PER_BATCH);
+    allImages.forEach(url => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Foto';
+      img.className = "w-full rounded-lg shadow-md filter grayscale hover:grayscale-0 hover:scale-105 transition-all duration-300 mb-2";
+      img.loading = "lazy";
 
-      nextImages.forEach(url => {
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'Foto';
-        img.className = "w-full rounded-lg shadow-md filter grayscale hover:grayscale-0 hover:scale-105 transition-all duration-300 mb-2";
-        img.loading = "lazy";
+      galeria.appendChild(img);
+    });
+  }
 
-        
-
-        galeria.appendChild(img);
-      });
-
-      currentIndex += IMAGES_PER_BATCH;
-      loading = false;
-    }
-
-    function handleScroll() {
-      const scrollBottom = window.innerHeight + window.scrollY;
-      const pageHeight = document.body.offsetHeight;
-      if (scrollBottom >= pageHeight - 200) {
-        loadNextBatch();
-      }
-    }
-
-    fetch('./galeria/images.json')
-      .then(res => res.json())
-      .then(imagenes => {
-        allImages = imagenes;
-        loadNextBatch();
-        window.addEventListener('scroll', handleScroll);
-      })
-      .catch(error => {
-        console.error("Error cargando imágenes:", error);
-      });
-  </script>
+  fetch('./galeria/images.json')
+    .then(res => res.json())
+    .then(imagenes => {
+      allImages = imagenes;
+      loadAllImages(); // carga todas las imágenes directamente
+    })
+    .catch(error => {
+      console.error("Error cargando imágenes:", error);
+    });
+</script>
 
 </body>
 </html>
